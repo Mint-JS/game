@@ -28,13 +28,13 @@ const tetrominoes = [
 
 const colors = [
     null,
-    '#00f0f0', // I
-    '#f0f000', // O
-    '#a000f0', // T
-    '#0000f0', // J
-    '#f0a000', // L
-    '#00f000', // S
-    '#f00000', // Z
+    '#00eaff', // I (더 밝은 하늘색)
+    '#ffe600', // O (밝은 노랑)
+    '#b800ff', // T (진한 보라)
+    '#0050ff', // J (진한 파랑)
+    '#ff9500', // L (밝은 주황)
+    '#00ff5e', // S (밝은 초록)
+    '#ff003c', // Z (진한 빨강)
 ];
 
 let arena = createMatrix(ROWS, COLS);
@@ -50,7 +50,8 @@ function drawMatrix(matrix, offset) {
             if (value) {
                 context.fillStyle = colors[value];
                 context.fillRect(x + offset.x, y + offset.y, 1, 1);
-                context.strokeStyle = "#222";
+                context.lineWidth = 0.05; // 테두리 두께 얇게
+                context.strokeStyle = "#fff"; // 흰색 테두리
                 context.strokeRect(x + offset.x, y + offset.y, 1, 1);
             }
         });
@@ -172,7 +173,7 @@ function update(time = 0) {
 }
 
 function draw() {
-    context.fillStyle = "#111";
+    context.fillStyle = "#e0e0e0"; // 밝은 배경색
     context.fillRect(0, 0, COLS, ROWS);
     drawMatrix(arena, {x:0, y:0});
     drawMatrix(player.matrix, player.pos);
