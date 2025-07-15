@@ -1,0 +1,37 @@
+body {
+    background: linear-gradient(135deg, #222, #444);
+    color: #fff;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    margin-top: 30px;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+}
+canvas {
+    background: #111;
+    display: block;
+    margin: 30px auto;
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px #333;
+}
+#score {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+#restart {
+    padding: 10px 30px;
+    font-size: 1em;
+    background: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#restart:hover {
+    background: #e65100;
+}
