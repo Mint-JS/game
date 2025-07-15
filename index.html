@@ -6,11 +6,18 @@
   <style>
     canvas { background: #eee; display: block; margin: 30px auto; }
     body { text-align: center; }
+    #score { font-weight: bold; color: #205fa3; }
+    #resetBtn { margin-top: 13px; font-size: 16px; }
+    div { margin-top: 10px; }
   </style>
 </head>
 <body>
   <h1>테트리스</h1>
   <canvas id="tetris" width="240" height="400"></canvas>
-  <script src="tetris.js"></script>
+  <button id="resetBtn">리셋</button>
+  <div>점수: <span id="score">0</span></div>
+
+  <!-- 자바스크립트 파일 연결 -->
+  <script src="game.js"></script>
 </body>
 </html>

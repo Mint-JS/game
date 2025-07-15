@@ -2,6 +2,19 @@ const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
 context.scale(20, 20);
 
+const colors = [
+  null,
+  '#FF0D72',
+  '#0DC2FF',
+  '#0DFF72',
+  '#F538FF',
+  '#FF8E0D',
+  '#FFE138',
+  '#3877FF'
+];
+
+let score = 0;
+
 function arenaSweep() {
   outer: for (let y = arena.length - 1; y > 0; --y) {
     for (let x = 0; x < arena[y].length; ++x) {
@@ -9,6 +22,8 @@ function arenaSweep() {
     }
     const row = arena.splice(y, 1)[0].fill(0);
     arena.unshift(row);
+    score += 10;
+    updateScore();
     ++y;
   }
 }
@@ -103,6 +118,8 @@ function playerReset() {
   player.pos.x = ((arena[0].length / 2) | 0) - ((player.matrix[0].length / 2) | 0);
   if (collide(arena, player)) {
     arena.forEach(row => row.fill(0));
+    score = 0;
+    updateScore();
     alert('게임 오버!');
   }
 }
@@ -121,6 +138,19 @@ function playerRotate(dir) {
     }
   }
 }
+
+function updateScore() {
+  document.getElementById('score').textContent = score;
+}
+
+function resetGame() {
+  arena.forEach(row => row.fill(0));
+  score = 0;
+  updateScore();
+  playerReset();
+}
+
+document.getElementById('resetBtn').addEventListener('click', resetGame);
 
 let dropCounter = 0;
 let dropInterval = 1000;
@@ -145,26 +175,17 @@ function draw() {
 }
 
 document.addEventListener('keydown', event => {
-  if (event.keyCode === 37) playerMove(-1);
-  else if (event.keyCode === 39) playerMove(1);
-  else if (event.keyCode === 40) playerDrop();
-  else if (event.keyCode === 81) playerRotate(-1);
-  else if (event.keyCode === 87) playerRotate(1);
+  if (event.keyCode === 37) playerMove(-1);       // ←
+  else if (event.keyCode === 39) playerMove(1);   // →
+  else if (event.keyCode === 40) playerDrop();    // ↓
+  else if (event.keyCode === 81) playerRotate(-1); // Q
+  else if (event.keyCode === 87) playerRotate(1);  // W
+  else if (event.keyCode === 38) playerRotate(1);  // ↑
 });
-
-const colors = [
-  null,
-  '#FF0D72',
-  '#0DC2FF',
-  '#0DFF72',
-  '#F538FF',
-  '#FF8E0D',
-  '#FFE138',
-  '#3877FF'
-];
 
 const arena = createMatrix(12, 20);
 const player = { pos: {x:0, y:0}, matrix: null };
 
 playerReset();
 update();
+updateScore();
